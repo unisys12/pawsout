@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\User;
 use App\Models\Organization;
 
 test('to array', function () {
@@ -22,4 +23,10 @@ test('to array', function () {
             'created_at',
             'updated_at',
         ]);
+});
+
+test('an organization can have many users', function () {
+    $org = Organization::factory()->has(User::factory(2))->create()->refresh();
+
+    expect(count($org->users))->toBe(2);
 });

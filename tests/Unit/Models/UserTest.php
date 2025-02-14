@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Organization;
 use App\Models\User;
 
 test('to array', function () {
@@ -13,7 +14,18 @@ test('to array', function () {
             'name',
             'email',
             'email_verified_at',
+            'organization_id',
             'created_at',
             'updated_at',
         ]);
+});
+
+test('user belongs to an organization', function () {
+    $user = User::factory()->for(
+        Organization::factory()->state(
+            ['name' => 'For The Puppies Foundation']
+        )
+    )->create()->refresh();
+
+    expect($user->organization->name)->toBe('For The Puppies Foundation');
 });
