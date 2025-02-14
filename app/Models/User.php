@@ -37,6 +37,16 @@ final class User extends Authenticatable
     ];
 
     /**
+     * Organization a user belongs to
+     *
+     * @return BelongsTo<Organization,$this>
+     */
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -47,13 +57,5 @@ final class User extends Authenticatable
             'email_verified_at' => 'immutable_datetime',
             'password' => 'hashed',
         ];
-    }
-
-    /**
-     * Organization a user belongs to
-     */
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class);
     }
 }

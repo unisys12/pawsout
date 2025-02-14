@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
 
 test('to array', function () {
     $org = Organization::factory()->create()->refresh();
