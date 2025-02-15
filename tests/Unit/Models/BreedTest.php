@@ -23,3 +23,9 @@ test('to array', function () {
             'updated_at',
         ]);
 });
+
+test('a breed belongs to many animals', function () {
+    $breed = Breed::factory()->hasAnimals(2)->create()->refresh();
+
+    expect(count(collect($breed->animals)))->toBe(2);
+});
