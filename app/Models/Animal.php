@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Animal extends Model
 {
@@ -59,6 +60,16 @@ final class Animal extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * A animal will have many weights AnimalWeight
+     *
+     * @return HasMany<AnimalWeight, $this>
+     */
+    public function weights(): HasMany
+    {
+        return $this->hasMany(AnimalWeight::class);
     }
 
     /**

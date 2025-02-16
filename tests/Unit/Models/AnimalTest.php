@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Animal;
+use App\Models\AnimalWeight;
 use App\Models\Breed;
 
 test('to array', function () {
@@ -75,4 +76,31 @@ test('an animal should have a status', function () {
         ->refresh();
 
     expect($animal->status->label)->toBe('Available');
+});
+
+test('we can track an animals weight over time', function () {
+    $animal = Animal::factory()->create([
+        'weight' => 10,
+    ])->refresh();
+
+    // After adding a animal, the initial weight should be saved
+    $aw1 = AnimalWeight::create([
+        'animal_id' => $animal->id,
+        'weight' => $animal->weight,
+    ]);
+
+    expect(count(collect($animal->weights)))->toBe(1);
+
+    // Later, we will update the animals weight to a new weight.
+    $animal->weight = 12;
+
+    $aw2 = AnimalWeight::create([
+        'animal_id' => $animal->id,
+        'weight' => $animal->weight,
+    ]);
+
+    // And we should be able to access the weights for display
+    $weights = AnimalWeight::where('animal_id', $animal->id)->get();
+
+    expect(count($weights))->toBe(2);
 });
