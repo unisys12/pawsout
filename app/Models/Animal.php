@@ -73,6 +73,19 @@ final class Animal extends Model
     }
 
     /**
+     * A animal can be adopted more than once.
+     * This is being put into place for the
+     * future support of the returning
+     * of an animal, which will occur.
+     *
+     * @return BelongsToMany<Adopter, $this>
+     */
+    public function adopters(): BelongsToMany
+    {
+        return $this->belongsToMany(Adopter::class);
+    }
+
+    /**
      * Attributes that should be cast
      *
      * @return array<string, string>

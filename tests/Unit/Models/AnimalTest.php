@@ -104,3 +104,9 @@ test('we can track an animals weight over time', function () {
 
     expect(count($weights))->toBe(2);
 });
+
+test('that an animal can be adopted by more than one person', function () {
+    $animal = Animal::factory()->hasAdopters(2)->create()->refresh();
+
+    expect(count($animal->adopters))->toBe(2);
+});
