@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Models\Animal;
 use App\Models\AnimalWeight;
 use App\Models\Breed;
+use Carbon\Carbon;
 
 test('to array', function () {
     $animal = Animal::factory()->create()->refresh();
@@ -109,4 +110,28 @@ test('that an animal can be adopted by more than one person', function () {
     $animal = Animal::factory()->hasAdopters(2)->create()->refresh();
 
     expect(count($animal->adopters))->toBe(2);
+});
+
+test('that an animal can be scheduled for visitations', function () {
+    $animal = Animal::factory()->hasVisitations(2)->create()->refresh();
+    expect(count($animal->visitations))->toBe(2);
+});
+
+test('we can view all previous visits with an animal', function () {
+    $animal = Animal::factory()
+        ->hasVisitations(2, [
+            'scheduled_at' => Carbon::now()->subDays(2),
+        ])->create()->refresh();
+
+    expect(count($animal->previous_visits()->get()))->toBe(2);
+});
+
+test('we can view all upcoming visits with an animal', function () {
+    $animal = Animal::factory()
+        ->hasVisitations(2, [
+            'scheduled_at' => now()->addDays(2),
+            'status' => 'scheduled',
+        ])->create()->refresh();
+
+    expect(count($animal->upcoming_visits()->get()))->toBe(2);
 });

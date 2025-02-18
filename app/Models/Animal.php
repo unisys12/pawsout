@@ -86,9 +86,39 @@ final class Animal extends Model
     }
 
     /**
+     * All scheduled for visitations for an animal
+     *
+     * @return HasMany<Visitation, $this>
+     */
+    public function visitations(): HasMany
+    {
+        return $this->hasMany(Visitation::class);
+    }
+
+    /**
+     * Previously scheduled visitations for an animal
+     *
+     * @return HasMany<Visitation, $this>
+     */
+    public function previous_visits(): HasMany
+    {
+        return $this->visitations()->previous();
+    }
+
+    /**
+     * Upcoming scheduled visitations for an animal
+     *
+     * @return HasMany<Visitation, $this>
+     */
+    public function upcoming_visits(): HasMany
+    {
+        return $this->visitations()->upcoming();
+    }
+
+    /**
      * Attributes that should be cast
      *
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     protected function casts(): array
     {
