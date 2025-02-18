@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 final class Visitation extends Model
 {
@@ -70,6 +71,16 @@ final class Visitation extends Model
         return $query->where('scheduled_at', '<', now())
             ->orWhere('status', 'completed')
             ->orderByDesc('scheduled_at');
+    }
+
+    /**
+     * Get related to a Visitation
+     *
+     * @return MorphMany<Note, $this>
+     */
+    public function notes(): MorphMany
+    {
+        return $this->morphMany(Note::class, 'noteable');
     }
 
     /**

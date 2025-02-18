@@ -29,3 +29,9 @@ test('a breed belongs to many animals', function () {
 
     expect(count(collect($breed->animals)))->toBe(2);
 });
+
+test('notes can be made on a breed', function () {
+    $breed = Breed::factory()->hasNotes(2)->create()->refresh();
+
+    expect(count($breed->notes))->toBe(2);
+});

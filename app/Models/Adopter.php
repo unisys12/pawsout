@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 final class Adopter extends Model
 {
@@ -52,5 +53,15 @@ final class Adopter extends Model
     public function upcoming_visits(): HasMany
     {
         return $this->visitations()->upcoming();
+    }
+
+    /**
+     * Get all of an Adopters notes
+     *
+     * @return MorphMany<Note, $this>
+     */
+    public function notes(): MorphMany
+    {
+        return $this->morphMany(Note::class, 'noteable');
     }
 }

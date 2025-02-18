@@ -23,3 +23,9 @@ test('to array', function () {
             'updated_at',
         ]);
 });
+
+test('notes can be made on a vet', function () {
+    $vet = Veterinarian::factory()->hasNotes(2)->create()->refresh();
+
+    expect(count($vet->notes))->toBe(2);
+});

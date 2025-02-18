@@ -135,3 +135,9 @@ test('we can view all upcoming visits with an animal', function () {
 
     expect(count($animal->upcoming_visits()->get()))->toBe(2);
 });
+
+test('notes can be made on a animal', function () {
+    $animal = Animal::factory()->hasNotes(2)->create()->refresh();
+
+    expect(count($animal->notes))->toBe(2);
+});

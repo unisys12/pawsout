@@ -56,3 +56,9 @@ test('we can view all upcoming visits with an adopter', function () {
 
     expect(count($adopter->upcoming_visits()->get()))->toBe(2);
 });
+
+test('notes can be made on a adopter', function () {
+    $adopter = Adopter::factory()->hasNotes(2)->create()->refresh();
+
+    expect(count($adopter->notes))->toBe(2);
+});

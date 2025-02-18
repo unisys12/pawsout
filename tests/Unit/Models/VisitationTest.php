@@ -30,3 +30,10 @@ test('a visitation can be scheduled for an animal', function () {
     expect($visit->animal->name)->toBe('Crystal');
     expect($visit->adopter->name)->toBe('Barney');
 });
+
+// Why is this implementation different from the one in VeterinarianTest.php?
+test('notes can be made on a visitation', function () {
+    $visit = Visitation::factory()->hasNotes(2)->create()->refresh();
+
+    expect(count($visit->notes()->get()))->toBe(2);
+});
