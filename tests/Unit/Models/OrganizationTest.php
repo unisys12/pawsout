@@ -30,3 +30,9 @@ test('an organization can have many users', function () {
 
     expect(count($org->users))->toBe(2);
 });
+
+test('documents can be associated with an org', function () {
+    $org = Organization::factory()->hasDocuments(2)->create()->refresh();
+
+    expect(count($org->documents))->toBe(2);
+});

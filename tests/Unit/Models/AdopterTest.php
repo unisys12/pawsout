@@ -62,3 +62,9 @@ test('notes can be made on a adopter', function () {
 
     expect(count($adopter->notes))->toBe(2);
 });
+
+test('documents can be associated with an adopter', function () {
+    $adopter = Adopter::factory()->hasDocuments(2)->create()->refresh();
+
+    expect(count($adopter->documents))->toBe(2);
+});

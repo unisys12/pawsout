@@ -22,4 +22,14 @@ final class Veterinarian extends Model
     {
         return $this->morphMany(Note::class, 'noteable');
     }
+
+    /**
+     * Get all of an Veterinarians documents
+     *
+     * @return MorphMany<Document, $this>
+     */
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
 }

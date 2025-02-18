@@ -64,4 +64,14 @@ final class Adopter extends Model
     {
         return $this->morphMany(Note::class, 'noteable');
     }
+
+    /**
+     * Get all of an Adopters documents
+     *
+     * @return MorphMany<Document, $this>
+     */
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
 }

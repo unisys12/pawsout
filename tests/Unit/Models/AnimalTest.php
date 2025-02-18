@@ -141,3 +141,9 @@ test('notes can be made on a animal', function () {
 
     expect(count($animal->notes))->toBe(2);
 });
+
+test('documents can be associated with an adopter', function () {
+    $animal = Animal::factory()->hasDocuments(2)->create()->refresh();
+
+    expect(count($animal->documents))->toBe(2);
+});

@@ -84,6 +84,16 @@ final class Visitation extends Model
     }
 
     /**
+     * Get all of an Visitations documents
+     *
+     * @return MorphMany<Document, $this>
+     */
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Document::class, 'documentable');
+    }
+
+    /**
      * Attributes that should be cast
      *
      * @return array<string, mixed>

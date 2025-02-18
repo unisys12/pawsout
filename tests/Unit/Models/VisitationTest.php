@@ -37,3 +37,9 @@ test('notes can be made on a visitation', function () {
 
     expect(count($visit->notes()->get()))->toBe(2);
 });
+
+test('documents can be associated with an visit', function () {
+    $visit = Visitation::factory()->hasDocuments(2)->create()->refresh();
+
+    expect(count($visit->documents))->toBe(2);
+});

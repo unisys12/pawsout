@@ -29,3 +29,9 @@ test('notes can be made on a vet', function () {
 
     expect(count($vet->notes))->toBe(2);
 });
+
+test('documents can be associated with an vet', function () {
+    $vet = Veterinarian::factory()->hasDocuments(2)->create()->refresh();
+
+    expect(count($vet->documents))->toBe(2);
+});
