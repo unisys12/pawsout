@@ -56,7 +56,7 @@ test('to array', function () {
 
 test('an animal can have many breeds', function () {
     $animal = Animal::factory()
-        ->has(Breed::factory()->count(2))
+        ->hasBreeds(2)
         ->create()
         ->refresh();
 
