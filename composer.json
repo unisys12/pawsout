@@ -2,10 +2,10 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "The Kennel Management System with jazz hands!",
     "keywords": [
-        "laravel",
-        "framework"
+        "animal rescue",
+        "animal rescue management"
     ],
     "license": "MIT",
     "require": {
