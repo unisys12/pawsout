@@ -29,3 +29,8 @@ test('user belongs to an organization', function () {
 
     expect($user->organization->name)->toBe('For The Puppies Foundation');
 });
+
+test('user can be a foster', function () {
+    $user = User::factory()->hasFoster(['zip' => '38834'])->create()->refresh();
+    expect($user->foster->zip)->toBe('38834');
+});

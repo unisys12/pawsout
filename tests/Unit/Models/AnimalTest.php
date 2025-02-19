@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Models\Animal;
 use App\Models\AnimalWeight;
 use App\Models\Breed;
+use App\Models\User;
 use Carbon\Carbon;
 
 test('to array', function () {
@@ -49,6 +50,7 @@ test('to array', function () {
             'new_people_reaction',
             'created_at',
             'updated_at',
+            'foster_id',
         ]);
 });
 
@@ -108,7 +110,6 @@ test('we can track an animals weight over time', function () {
 
 test('that an animal can be adopted by more than one person', function () {
     $animal = Animal::factory()->hasAdopters(2)->create()->refresh();
-
     expect(count($animal->adopters))->toBe(2);
 });
 
@@ -138,12 +139,20 @@ test('we can view all upcoming visits with an animal', function () {
 
 test('notes can be made on a animal', function () {
     $animal = Animal::factory()->hasNotes(2)->create()->refresh();
-
     expect(count($animal->notes))->toBe(2);
 });
 
 test('documents can be associated with an adopter', function () {
     $animal = Animal::factory()->hasDocuments(2)->create()->refresh();
-
     expect(count($animal->documents))->toBe(2);
+});
+
+test('a animal can have a foster', function () {
+    $animal = Animal::factory()
+        ->forFoster([
+            'user_id' => User::factory()->create(['name' => 'John Doe']),
+        ])
+        ->create()
+        ->refresh();
+    expect($animal->foster->user->name)->toBe('John Doe');
 });
