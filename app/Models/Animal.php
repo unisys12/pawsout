@@ -137,6 +137,16 @@ final class Animal extends Model
     }
 
     /**
+     * Get all Animals with a Foster
+     *
+     * @return BelongsTo<Foster, $this>
+     */
+    public function foster(): BelongsTo
+    {
+        return $this->belongsTo(Foster::class);
+    }
+
+    /**
      * Attributes that should be cast
      *
      * @return array<string, mixed>
