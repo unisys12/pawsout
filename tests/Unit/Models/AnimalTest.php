@@ -155,3 +155,12 @@ test('a animal can have a foster', function () {
         ->refresh();
     expect($animal->foster->user->name)->toBe('John Doe');
 });
+
+test('images can be added to a media collection', function () {
+    $animal = Animal::factory()->create()->refresh();
+
+    $animal->addMediaFromUrl('https://res.cloudinary.com/ftpta-com/image/upload/v1583328838/Chicken%20Noodle/20191125_214450_mumbjf.jpg')->toMediaCollection('animal_images');
+
+    $collection = $animal->getRegisteredMediaCollections();
+    expect($collection->keys()[0])->toBe('animal_images');
+});

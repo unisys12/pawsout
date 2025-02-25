@@ -27,11 +27,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-final class Animal extends Model
+final class Animal extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\AnimalFactory> */
     use HasFactory;
+
+    /** @use InteractsWithMedia<\Spatie\MediaLibrary\MediaCollections\Models\Media> */
+    use InteractsWithMedia;
+
+    /**
+     * The media collections for the model
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('animal_images');
+    }
 
     /**
      * An Animal can have many breeds through secondary_breed_id
