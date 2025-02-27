@@ -38,7 +38,7 @@ final class ExportAnimals implements ShouldQueue
                     Str::slug(
                         /** @phpstan-ignore-next-line */
                         Auth::user()->organization->name
-                    ) . '-' . Date::now()->toDateString() . '-animals.' . $this->ext
+                    ).'-'.Date::now()->toDateString().'-animals.'.$this->ext
                 )
         );
 
