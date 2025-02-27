@@ -63,8 +63,10 @@ final class User extends Authenticatable
 
     /**
      * Export all animals to a CSV file
+     *
+     * File types supported are: "csv", "xlsx".
      */
-    public function exportAnimalsToCSV(): SimpleExcelWriter
+    public function exportAnimals(string $ext = 'csv'): SimpleExcelWriter
     {
         $animals = Animal::all();
 
@@ -74,12 +76,12 @@ final class User extends Authenticatable
              */
             Storage::disk('local')
                 /** @phpstan-ignore property.nonObject */
-                ->path(Str::slug($this->organization->name) . '-' . Date::now()->toDateString() . '-animals.csv')
+                ->path(Str::slug($this->organization->name).'-'.Date::now()->toDateString().'-animals.'.$ext)
         );
 
         if ($animals->isNotEmpty()) {
-            $writer->addRow(array_keys($animals->first()->toArray()));
-            $animals->each(function (Animal $animal) use ($writer) {
+            $writer->addHeader(array_keys($animals->first()->toArray()));
+            $animals->each(function (Animal $animal) use ($writer): void {
                 $writer->addRow($animal->toArray());
             });
         }

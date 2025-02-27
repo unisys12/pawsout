@@ -37,17 +37,24 @@ test('user can be a foster', function () {
     expect($user->foster->zip)->toBe('38834');
 });
 
-test('user can export all animals to a CSV file', function () {
+test('user can export all animals to a file', function () {
     $user = User::factory()->for(
         Organization::factory()->state(
             ['name' => 'For The Puppies Foundation']
         )
     )->create()->refresh();
-    $animals = Animal::factory()->count(3)->create();
 
-    $writer = $user->exportAnimalsToCSV();
+    Animal::factory()->count(3)->create();
+
+    $csvWriter = $user->exportAnimals('csv');
+    $excelWriter = $user->exportAnimals('xlsx');
+    $defaultWriter = $user->exportAnimals();
 
     // Row count is 4 because the header row is included
-    expect($writer->getWriter()->getWrittenRowCount())->toBe(4);
+    expect($csvWriter->getWriter()->getWrittenRowCount())->toBe(4);
+    expect($excelWriter->getWriter()->getWrittenRowCount())->toBe(4);
+    expect($defaultWriter->getWriter()->getWrittenRowCount())->toBe(4);
+
     Storage::disk('local')->assertExists('for-the-puppies-foundation-'.now()->toDateString().'-animals.csv');
+    Storage::disk('local')->assertExists('for-the-puppies-foundation-'.now()->toDateString().'-animals.xlsx');
 });
