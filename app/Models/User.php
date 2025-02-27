@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Spatie\SimpleExcel\SimpleExcelWriter;
 
 final class User extends Authenticatable
 {
@@ -55,6 +59,34 @@ final class User extends Authenticatable
     public function foster(): HasOne
     {
         return $this->hasOne(Foster::class);
+    }
+
+    /**
+     * Export all animals to a CSV file
+     */
+    public function exportAnimalsToCSV(): SimpleExcelWriter
+    {
+        $animals = Animal::all();
+
+        $writer = SimpleExcelWriter::create(
+            /**
+             * @Todo: Fix this issue related to calling $this->organization->name causing error property.nonObject
+             */
+            Storage::disk('local')
+                /** @phpstan-ignore property.nonObject */
+                ->path(Str::slug($this->organization->name) . '-' . Date::now()->toDateString() . '-animals.csv')
+        );
+
+        if ($animals->isNotEmpty()) {
+            $writer->addRow(array_keys($animals->first()->toArray()));
+            $animals->each(function (Animal $animal) use ($writer) {
+                $writer->addRow($animal->toArray());
+            });
+        }
+
+        $writer->close();
+
+        return $writer;
     }
 
     /**
