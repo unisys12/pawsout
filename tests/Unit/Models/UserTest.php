@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Models\Animal;
 use App\Models\Organization;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 test('to array', function () {
@@ -44,16 +45,13 @@ test('user can export all animals to a file', function () {
         )
     )->create()->refresh();
 
+    Auth::login($user);
+
     Animal::factory()->count(3)->create();
 
     $csvWriter = $user->exportAnimals('csv');
     $excelWriter = $user->exportAnimals('xlsx');
     $defaultWriter = $user->exportAnimals();
-
-    // Row count is 4 because the header row is included
-    expect($csvWriter->getWriter()->getWrittenRowCount())->toBe(4);
-    expect($excelWriter->getWriter()->getWrittenRowCount())->toBe(4);
-    expect($defaultWriter->getWriter()->getWrittenRowCount())->toBe(4);
 
     Storage::disk('local')->assertExists('for-the-puppies-foundation-'.now()->toDateString().'-animals.csv');
     Storage::disk('local')->assertExists('for-the-puppies-foundation-'.now()->toDateString().'-animals.xlsx');

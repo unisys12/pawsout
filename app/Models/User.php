@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Jobs\ExportAnimals;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Spatie\SimpleExcel\SimpleExcelWriter;
 
 final class User extends Authenticatable
 {
@@ -66,29 +64,9 @@ final class User extends Authenticatable
      *
      * File types supported are: "csv", "xlsx".
      */
-    public function exportAnimals(string $ext = 'csv'): SimpleExcelWriter
+    public function exportAnimals(string $ext = 'csv'): void
     {
-        $animals = Animal::all();
-
-        $writer = SimpleExcelWriter::create(
-            /**
-             * @Todo: Fix this issue related to calling $this->organization->name causing error property.nonObject
-             */
-            Storage::disk('local')
-                /** @phpstan-ignore property.nonObject */
-                ->path(Str::slug($this->organization->name).'-'.Date::now()->toDateString().'-animals.'.$ext)
-        );
-
-        if ($animals->isNotEmpty()) {
-            $writer->addHeader(array_keys($animals->first()->toArray()));
-            $animals->each(function (Animal $animal) use ($writer): void {
-                $writer->addRow($animal->toArray());
-            });
-        }
-
-        $writer->close();
-
-        return $writer;
+        ExportAnimals::dispatch($ext);
     }
 
     /**
