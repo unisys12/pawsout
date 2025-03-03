@@ -1,0 +1,37 @@
+[
+    {
+        "uid": "8452421c8bec423699303124d6d44062",
+        "name": "24PetWatch",
+        "slug": "24petwatch",
+        "flag": null,
+        "phonenumber": "+18663757387",
+        "email": "info@24petwatch.com",
+        "website": "https://www.24petwatch.com/",
+        "summary": null,
+        "found": 20,
+        "members": 1,
+        "records": 0,
+        "lat": 43.4436067,
+        "lng": -79.6978281,
+        "continent": {
+            "name": "North America",
+            "code": "na"
+        },
+        "country": {
+            "name": "Canada",
+            "code": "ca",
+            "flag": "https://cdn.chipndoodle.com/flags/ca.png"
+        },
+        "region": {
+            "name": "Ontario",
+            "code": "on"
+        },
+        "city": {
+            "name": "Oakville",
+            "code": "oakville"
+        },
+        "created": "2020-06-18T08:46:33.564Z",
+        "lastupdated": "2020-06-18T08:46:52.225Z",
+        "logo": "https://uploads.chipndoodle.com/2020/06/18/08/c708a201da5f4f32b9481fd46806e130/preview.png"
+    }
+]

@@ -36,5 +36,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'chipndoodle' => [
+        'token' => env('CHIPNDOODLE_API_KEY'),
+    ],
 
 ];
