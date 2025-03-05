@@ -12,12 +12,13 @@
 
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
+            @viteReactRefresh
+            @vite('resources/js/app.jsx')
         @endif
+        @inertiaHead
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-            <h1 class="text-4xl">Hello</h1>
-        </div>
+
+        @inertia
     </body>
 </html>
