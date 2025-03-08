@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
 @source "../views";
 
 @config "../../tailwind.config.js";
