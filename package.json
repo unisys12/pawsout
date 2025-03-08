@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "lint": "prettier . --check"
     },
     "devDependencies": {
         "@vitejs/plugin-react-swc": "^3.8.0",
@@ -12,6 +13,8 @@
         "concurrently": "^9.1.2",
         "laravel-vite-plugin": "^1.2.0",
         "prettier": "3.5.3",
+        "prettier-plugin-blade": "^2.1.21",
+        "prettier-plugin-tailwindcss": "^0.6.11",
         "vite": "^6.2.1"
     },
     "dependencies": {

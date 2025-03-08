@@ -1,0 +1,5 @@
+composer.lock
+resources/js/components/**/*.jsx
+tailwind.config.js
+public/build
+storage
