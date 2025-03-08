@@ -4,7 +4,9 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "lint": "prettier . --check"
+        "prettier-check": "prettier . --check",
+        "prettier-watch": "npx onchange \"**/*\" -- npx prettier --write --ignore-unknown {{changed}}",
+        "prettier": "prettier . --write"
     },
     "devDependencies": {
         "@vitejs/plugin-react-swc": "^3.8.0",
@@ -12,6 +14,7 @@
         "axios": "^1.7.4",
         "concurrently": "^9.1.2",
         "laravel-vite-plugin": "^1.2.0",
+        "onchange": "^7.1.0",
         "prettier": "3.5.3",
         "prettier-plugin-blade": "^2.1.21",
         "prettier-plugin-tailwindcss": "^0.6.11",
