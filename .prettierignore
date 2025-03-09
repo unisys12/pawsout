@@ -1,5 +1,5 @@
 composer.lock
-resources/js/components/**/*.jsx
+resources/js/components/ui/*.jsx
 tailwind.config.js
 public/build
 storage
