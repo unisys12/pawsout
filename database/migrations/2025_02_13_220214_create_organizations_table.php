@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('zip');
             $table->string('phone');
             $table->string('email');
-            $table->string('website');
+            $table->string('website')->nullable();
             $table->string('logo_path');
             $table->timestamps();
         });
