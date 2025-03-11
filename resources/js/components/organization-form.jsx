@@ -4,9 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "@inertiajs/react";
-import { Redo } from "lucide-react";
 
-export function RegistrationForm({ className, ...props }) {
+export function OrganizationForm({ className, ...props }) {
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         address: "",
@@ -21,7 +20,7 @@ export function RegistrationForm({ className, ...props }) {
 
     function submit(e) {
         e.preventDefault();
-        post("/register");
+        post("/organization");
     }
 
     return (

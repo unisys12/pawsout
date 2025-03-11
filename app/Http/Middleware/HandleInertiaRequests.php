@@ -39,7 +39,9 @@ final class HandleInertiaRequests extends Middleware
     {
         // @phpstan-ignore return.type
         return array_merge(parent::share($request), [
-            //
+            'flash' => [
+                'message' => fn () => $request->session()->get('message'),
+            ],
         ]);
     }
 }

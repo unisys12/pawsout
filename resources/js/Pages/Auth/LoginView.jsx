@@ -1,6 +1,6 @@
-import { RegistrationForm } from "@/components/registration-form";
+import { LoginForm } from "@/components/login-form";
 
-export default function Page() {
+export default function LoginView() {
     return (
         <div className="bg-slate-200 dark:bg-gray-900">
             <header className="flex items-center justify-center">
@@ -8,7 +8,7 @@ export default function Page() {
             </header>
             <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
                 <div className="w-full max-w-sm">
-                    <RegistrationForm />
+                    <LoginForm />
                 </div>
             </div>
         </div>
