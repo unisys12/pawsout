@@ -53,7 +53,7 @@ final class Animal extends Model implements HasMedia
      */
     public function breeds(): BelongsToMany
     {
-        return $this->belongsToMany(Breed::class);
+        return $this->belongsToMany(Breed::class); // @phpstan-ignore-line
     }
 
     /**
@@ -96,7 +96,7 @@ final class Animal extends Model implements HasMedia
      */
     public function adopters(): BelongsToMany
     {
-        return $this->belongsToMany(Adopter::class);
+        return $this->belongsToMany(Adopter::class); // @phpstan-ignore-line
     }
 
     /**

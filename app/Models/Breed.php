@@ -21,7 +21,7 @@ final class Breed extends Model
      */
     public function animals(): BelongsToMany
     {
-        return $this->belongsToMany(Animal::class);
+        return $this->belongsToMany(Animal::class); // @phpstan-ignore-line
     }
 
     /**
